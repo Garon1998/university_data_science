@@ -1,0 +1,84 @@
+
+<mat-form-field style="margin-top: 20px; margin-left: 5%; width: 90%;">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="margin: 20px 5%;width: 90%;">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let food"> {{food?.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef> Categoria </th>
+    <td mat-cell *matCellDef="let food"> {{food?.category}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Prezzo </th>
+    <td mat-cell *matCellDef="let food"> {{food?.price}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef> Tempo </th>
+    <td mat-cell *matCellDef="let food"> {{food?.time}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="available">
+    <th mat-header-cell *matHeaderCellDef> Disponibile </th>
+    <td mat-cell *matCellDef="let food"> 
+      <mat-slide-toggle color="primary" [checked]="food?.available" (click)="updateFood(food?._id, !food?.available);"></mat-slide-toggle>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let food">
+      <button mat-flat-button (click)="deleteFood(food?._id)"><i class="material-icons">delete</i></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['name','category','price','time','available','delete']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['name','category','price','time','available','delete'];"></tr>
+</table>
+
+<mat-accordion>
+  <mat-expansion-panel style="width: 90%; margin-left:5%; margin-bottom: 20px;" class="mat-elevation-z8" (click)="form?.reset()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Aggiungi un cibo
+      </mat-panel-title>
+      <mat-panel-description>
+        Clicca per visualizzare
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form [formGroup]="form">
+      <mat-form-field class="space-on-side">
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="food.name">
+        <mat-error *ngIf="food?.name === ''">Inserire il nome del cibo</mat-error>
+      </mat-form-field>
+      <mat-form-field class="space-on-side">
+        <mat-label>Categoria</mat-label>
+        <mat-select [(value)]="food.category" [value]="food?.category">
+          <mat-option value="Antipasto">Antipasto</mat-option>
+          <mat-option value="Contorno">Contorno</mat-option>
+          <mat-option value="Dessert">Dessert</mat-option>
+          <mat-option value="Dolce">Dolce</mat-option>
+          <mat-option value="Primo Piatto">Primo Piatto</mat-option>
+          <mat-option value="Secondo Piatto">Secondo Piatto</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="space-on-side" style="width: 70px">
+        <mat-label>Prezzo</mat-label>
+        <input matInput type="number" min="0" [(ngModel)]="food.price" [ngModelOptions]="{standalone: true}" [value]="food?.price">
+      </mat-form-field>
+      <mat-form-field class="space-on-side" style="width: 70px">
+        <mat-label>Tempo di preparazione</mat-label>
+        <input matInput type="number" min="0" [(ngModel)]="food.time" [ngModelOptions]="{standalone: true}" [value]="food?.time">
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="accent" style="margin: 20px 20px;" [disabled]="food?.name === ''" (click)="createFood(); food.name = ''; food.price = 0; food.category = 'Primo piatto'; food.time = 0;">Conferma</button>
+  </mat-expansion-panel>
+</mat-accordion>

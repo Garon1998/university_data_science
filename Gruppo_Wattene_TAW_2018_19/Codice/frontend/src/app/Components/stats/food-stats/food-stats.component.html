@@ -1,0 +1,15 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="margin: 20px 5%;width: 90%;">
+    
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome del cibo </th>
+        <td mat-cell *matCellDef="let food"> {{food?.food_name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="valore">
+        <th mat-header-cell *matHeaderCellDef> Quantità venduta </th>
+        <td mat-cell *matCellDef="let food"> {{food?.nrfood}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="['nome', 'valore']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['nome', 'valore'];"></tr>
+  </table>

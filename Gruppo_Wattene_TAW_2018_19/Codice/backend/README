@@ -1,0 +1,11 @@
+/* 
+    
+    Come eseguire il backend
+
+*/
+
+Install packages with "npm install"
+
+After that execute "npm run start"
+
+Now the backend is running

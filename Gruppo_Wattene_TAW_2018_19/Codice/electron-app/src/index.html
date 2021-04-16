@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <base href="./">
+  <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+
+<body>
+  <h1>Hello World!</h1>
+  We are using node
+  <script>document.write(process.versions.node)</script>,
+  Chrome
+  <script>document.write(process.versions.chrome)</script>,
+  and Electron
+  <script>document.write(process.versions.electron)</script>.
+  <script src="runtime-es2015.js" type="module"></script>
+  <script src="runtime-es5.js" nomodule defer></script>
+  <script src="polyfills-es5.js" nomodule defer></script>
+  <script src="polyfills-es2015.js" type="module"></script>
+  <script src="styles-es2015.js" type="module"></script>
+  <script src="styles-es5.js" nomodule defer></script>
+  <script src="vendor-es2015.js" type="module"></script>
+  <script src="vendor-es5.js" nomodule defer></script>
+  <script src="main-es2015.js" type="module"></script>
+  <script src="main-es5.js" nomodule defer></script>
+</body>
+</body>
+
+</html>

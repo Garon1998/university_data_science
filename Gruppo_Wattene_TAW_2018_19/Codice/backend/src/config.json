@@ -1,0 +1,26 @@
+{
+    "userRole": [
+        "cameriere",
+        "cuoco",
+        "barista",
+        "cassa"
+    ],
+    "foodcategory":[
+        "Dessert",
+        "Antipasto",
+        "Primo Piatto",
+        "Secondo Piatto",
+        "Contorno",
+        "Dolce"
+    ],
+    "drinkcategory" : [
+        "Analcolico",
+        "Alcolico"
+    ],
+    "orderstate": [
+        "In coda",
+        "In preparazione",
+        "Servito",
+        "Pagato"
+    ]
+}

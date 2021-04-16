@@ -1,0 +1,18 @@
+<mat-card-title>Pagamento</mat-card-title>
+<mat-card-content>
+  <div *ngFor="let subOrder of subOrders">
+    <div *ngFor="let food of subOrder?.ordered_foods">
+      {{food?.price*food?.quantity}}€  x{{food?.quantity}} {{food?.name}}
+    </div>
+    <div *ngFor="let drink of subOrder?.ordered_drinks">
+      {{drink?.price*drink?.quantity}}€  x{{drink?.quantity}} {{drink?.name}}
+    </div>
+  </div>
+  <div style="margin-top: 20px;">
+    <b>Totale: {{total}}€</b>
+  </div>
+
+  <button mat-raised-button color="primary"style="margin-top: 25px" [mat-dialog-close]="table" (click)="pay()" cdkFocusInitial>Paga</button>
+</mat-card-content>
+
+

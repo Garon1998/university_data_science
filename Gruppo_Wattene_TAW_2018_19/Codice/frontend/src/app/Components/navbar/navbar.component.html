@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="app-toolbar" style="margin-bottom: 50px">
+  <span>
+    <a class="logo" routerLink='/dashboard'>WATTENE</a>
+  </span>
+  <span class="spacer"></span>
+
+  <button mat-raised-button color="primary">{{role}}</button>
+  <a routerLink="/backoffice">
+    <i class="material-icons light-icons" style="padding: 0 14px;" *ngIf="role === Roles?.cassa">settings</i>
+  </a>
+
+  <a routerLink="/login" (click)="logout()">
+    <i class="material-icons light-icons">logout</i>
+  </a>
+
+</mat-toolbar>

@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto,
+  "Helvetica Neue",
+  sans-serif;
+  overflow-x: hidden;
+}
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+.button {
+  margin: 50 50px;
+}
+
+.login {
+  width: 70vw;
+  margin: 0 auto;
+  text-align: center;
+}
+.stats {
+  width: 90vw;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.formLogin {
+  margin-top: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.light-icons {
+  color: white;
+  padding: 0 14px;
+}
+
+.light-button {
+  color: white;
+}
+
+.logo {
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.space-on-side {
+  margin: 0 20px;
+}

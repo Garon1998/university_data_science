@@ -1,0 +1,27 @@
+<!-- <mat-card-header>
+    <mat-card-title style="font-size: xx-large;">Tavoli serviti</mat-card-title>
+</mat-card-header>
+<mat-card-content>
+    <mat-toolbar>
+            <mat-toolbar-row *ngFor="let waiter of waiters">
+                {{waiter?.lastname}}  {{waiter?.firstname}}
+            </mat-toolbar-row>
+    </mat-toolbar>
+</mat-card-content>
+ -->
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="margin: 20px 5%;width: 90%;">
+    
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome del cameriere </th>
+        <td mat-cell *matCellDef="let waiter"> {{waiter?.waiter_name}} {{waiter?.waiter_surname}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="valore">
+        <th mat-header-cell *matHeaderCellDef> Numero ordini serviti </th>
+        <td mat-cell *matCellDef="let waiter"> {{waiter?.nrOrdini}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['nome', 'valore']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['nome', 'valore'];"></tr>
+</table>

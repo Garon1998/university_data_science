@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+<!--Dashboard per la cassa e per i camerieri-->
+
+<mat-tab-group class="stats" *ngIf="role === Roles?.cassa || role === Roles?.cameriere">
+  <mat-tab label="Tavoli">
+    <mat-card style="min-height: 100vh;" *ngIf="role === Roles?.cameriere || role === Roles?.cassa">
+      <mat-card-content>
+        <!-- rowHeight="1:1" -->
+        <mat-grid-list [cols]="breakpoint" rowHeight="1:1" (window:resize)="onResize($event)"
+          style="margin: 10px 10px;">
+          <div *ngFor="let table of tables" style="margin: 5em 5em;">
+            <mat-grid-tile>
+              <button mat-raised-button class="big-button" style="width: 100%;height: 100%; color: white; line-height: 30px;"
+                [ngStyle]="{'background-color': (table?.available)? 'green': (!table.available && table.order_id)? 'red': 'orange'}"
+                [matMenuTriggerFor]="tableMenu">
+                <div *ngIf="!table?.available && table?.waiter_id != null" style="margin: 0;">
+                  {{getCameriereDelTavolo(table?.waiter_id)}}</div>
+                <div *ngIf="role === Roles?.cassa && !table?.available && table?.order_id !== null" style="margin: 0;">
+                  {{getSuborderStateFoods(table?.order_id, table?._id)}}</div>
+                <div *ngIf="role === Roles?.cassa && !table?.available && table?.order_id !== null" style="margin: 0;">
+                  {{getSuborderStateDrinks(table?.order_id, table?._id)}}</div>
+                <div *ngIf="!table?.available && table?.order_id == null" style="margin: 0;">Attesa ordine...</div>
+                <div style="font-size: large;">
+                  # {{table?.table_number}}
+                </div>
+                <div style="font-size: large;">
+                  <i class="material-icons">supervisor_account</i> {{table?.clients}}/{{table?.total_seats}}
+                </div>
+              </button>
+
+              <mat-menu #tableMenu="matMenu">
+                <button mat-menu-item *ngIf="table?.available && (role === Roles?.cassa || role === Roles?.cameriere) "
+                  (click)="openTableDialog(table?._id, table?.total_seats, table)">Occupa tavolo</button>
+                <button mat-menu-item *ngIf="!table?.available && !table?.order_id && role === Roles?.cassa"
+                  (click)="freeTable(table?._id, table)">Libera tavolo</button>
+                <button mat-menu-item *ngIf="table?.order_id && role === Roles?.cassa"
+                  (click)="deleteOrder(table?.order_id)">Elimina ordine</button>
+                <button mat-menu-item *ngIf="role === Roles?.cassa && table?.clients == 0"
+                  (click)="deleteTable(table?._id)">Elimina tavolo</button>
+                <button mat-menu-item
+                  *ngIf="table?.waiter_id === user?._id && !table?.available && !table?.order_id != null && role === Roles?.cameriere"
+                  (click)="goToOrders(table?._id)">Gestione ordine</button>
+                <button mat-menu-item *ngIf="!table?.available && table?.order_id && role === Roles?.cassa"
+                  (click)="payment(table?._id, table?.order_id, false)">Paga</button>
+                <button mat-menu-item *ngIf="!table?.available && table?.order_id && role === Roles?.cassa"
+                  (click)="payment(table?._id, table?.order_id, true)">Paga e libera tavolo</button>
+              </mat-menu>
+            </mat-grid-tile>
+          </div>
+          <mat-grid-tile>
+            <button mat-raised-button class="big-button"
+              style="width: 300px;height: 250px; color: white;background-color: rgb(177, 50, 149)" (click)="addTable()"
+              *ngIf="role === Roles?.cassa">
+              <div style="font-size: 90px;">
+                +
+              </div>
+            </button>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-tab>
+  <mat-tab *ngIf="role === Roles?.cameriere">
+    <ng-template mat-tab-label>
+      <div [ngClass]="(nuoviOrdini===true) ? 'pulseColor':''" (click)="nuoviOrdini = false" >
+        <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
+        Da servire
+      </div>
+    </ng-template>
+    <app-serve-queue></app-serve-queue>
+  </mat-tab>
+</mat-tab-group>
+
+<!--Dashboard per i cuochi e per i baristi-->
+<app-preparation-queue *ngIf="role === Roles?.cuoco || role === Roles?.barista"></app-preparation-queue>

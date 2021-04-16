@@ -1,0 +1,37 @@
+create table libri (
+	id int auto_increment primary key,
+	titolo varchar(255) not null,
+	descrizione varchar(255) not null,
+	autore varchar(255) not null,
+	editore varchar(255) not null,
+	genere varchar(255) not null,
+	prezzo int not null
+);
+
+create table persone (
+	id int auto_increment primary key,
+	nome varchar(255) not null,
+	cognome varchar(255) not null,
+	indirizzo varchar(255) not null,
+	telefono char(10) not null,
+	email varchar(255) not null,
+	password varchar(255) not null
+);
+
+create table prestiti (
+	id_libro int,
+	id_persona int,
+	data_prestito date not null,
+	data_restituzione date,
+	primary key(id_libro, id_persona),
+	foreign key(id_libro) references libri(id) on delete cascade,
+	foreign key(id_persona) references persone(id) on delete cascade
+);
+
+create table admin (
+	id_persona int primary key,
+	foreign key(id_persona) references persone(id)
+);
+
+insert into libri (titolo, descrizione, autore, editore, genere, prezzo) 
+values ("Il signore delle anime", "Autobiografia di un immigrato", "Irène Némirovsky", "Adelphi", "Saggio breve", 14);

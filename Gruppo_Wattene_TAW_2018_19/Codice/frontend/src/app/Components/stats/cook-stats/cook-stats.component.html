@@ -1,0 +1,15 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="margin: 20px 5%;width: 90%;">
+    
+  <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome del cuoco </th>
+      <td mat-cell *matCellDef="let cook"> {{cook?.cook_name}} {{cook?.cook_surname}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="valore">
+      <th mat-header-cell *matHeaderCellDef> Numero piatti preparati </th>
+      <td mat-cell *matCellDef="let cook"> {{cook?.nrPiatti}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['nome', 'valore']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['nome', 'valore'];"></tr>
+</table>

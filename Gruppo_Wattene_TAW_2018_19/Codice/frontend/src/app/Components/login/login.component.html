@@ -1,0 +1,20 @@
+<mat-card class="login">
+  <mat-tab-group>
+    <mat-tab label="LOGIN">
+      <form [formGroup]="loginForm" class="formLogin">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Username" formControlName="username" [(ngModel)]="username" autocomplete="off">
+          <mat-error *ngIf="loginForm?.get('username')?.hasError('required')">Inserire l'username</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password" [(ngModel)]="password" autocomplete="off">
+          <mat-error *ngIf="loginForm?.get('password')?.hasError('required')">Inserire la password</mat-error>
+        </mat-form-field>
+        <div class="buttonForm">
+          <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!loginForm?.valid">Conferma</button>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

@@ -1,0 +1,41 @@
+<div *ngIf="!data?.addTable">
+  <ol>
+    <li>
+      <mat-form-field>
+        <input matInput type="number" [min]="data?.minSeats" [max]="data?.maxSeats" [(ngModel)]="numeroClienti" placeholder="Inserisci il numero di clienti">
+      </mat-form-field>
+    </li>
+
+    <li *ngIf="role === Roles?.cassa">
+      <mat-form-field>
+        <mat-label>Cameriere</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let waiter of waiters" [value]="waiter?._id" (click)="idCameriere = waiter?._id">
+            {{waiter.firstname}} {{waiter?.lastname}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </li>
+  </ol>
+  <div mat-dialog-actions>
+    <button mat-button (click)="close()">Chiudi</button>
+    <button mat-raised-button color="accent" *ngIf="numeroClienti > data?.maxSeats" (click)="openSnackBar('Il tavolo non ha abbastanza posti', 2000)"></button>
+    <button mat-raised-button color="accent" *ngIf="numeroClienti && numeroClienti > 0 && numeroClienti <= data?.maxSeats" (click)="takeTable(); close();">Ok</button>
+  </div>
+</div>
+<div *ngIf="data?.addTable">
+  <ol>
+    <li>
+      <mat-form-field>
+        <input matInput type="number" [min]="data?.minSeats" [max]="data?.maxSeats" [(ngModel)]="tableNumber" placeholder="Inserisci il numero del tavolo">
+      </mat-form-field>
+    </li>
+    <li>
+      <mat-form-field>
+        <input matInput type="number" min="0" [(ngModel)]="maxSeats" placeholder="Inserisci il numero di posti">
+      </mat-form-field>
+    </li>
+  </ol>
+  <button *ngIf="(tableNumber && tableNumber > 0) && (maxSeats && maxSeats > 0)" mat-raised-button color="accent" (click)="addTable(tableNumber,maxSeats); close()">Conferma</button>
+</div>
+

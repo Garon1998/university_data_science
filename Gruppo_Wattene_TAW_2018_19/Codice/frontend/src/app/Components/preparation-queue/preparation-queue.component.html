@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title style="font-size: xx-large;">Ordini</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-toolbar>
+      <mat-toolbar-row *ngFor="let suborder of suborders"
+        style="margin-bottom: 20px;overflow-x: scroll;overflow-y: hidden;">
+
+
+        <!-- se sono cuoco -->
+        <div *ngIf="role === Roles?.cuoco" style="display: contents;">
+
+          <div style="display: contents;">
+            <mat-card style="margin-right: 1rem; cursor: pointer;" [ngStyle]="{'background-color': 'yellow'}"
+              (click)="isAllSetToReadyFood(suborder) ? setAllFoodsReady(suborder?.order_id, suborder?._id) : openSnackBar('Non tutte i cibi sono pronti', 3000); ">
+              Pronto
+            </mat-card>
+          </div>
+
+          <mat-card style="margin-right: 1rem;font-size: 0.7em; cursor: pointer;"
+            *ngFor="let food of suborder?.ordered_foods"
+            [ngStyle]="{'background-color': (food?.prepared_by)? 'green': 'red'}"
+            (click)="setFoodReady(suborder?.order_id, suborder?._id, food?.food_id,!food?.prepared_by)">
+            {{food?.name}}
+            <br />
+            <span>x{{food?.quantity}}</span> <span> Tempo totale: {{food?.quantity*food?.time}} min</span>
+
+          </mat-card>
+        </div>
+
+        <!-- se sono barista -->
+        <div *ngIf="role === Roles?.barista" style="display: contents;">
+          <div style="display: contents;">
+            <mat-card style="margin-right: 1rem; cursor: pointer;" [ngStyle]="{'background-color': 'yellow'}"
+              (click)="isAllSetToReadyDrink(suborder) ? setAllDrinksReady(suborder?.order_id, suborder?._id) : openSnackBar('Non tutte le bibite sono pronte', 3000); ">
+              Pronto
+            </mat-card>
+          </div>
+
+          <mat-card style="margin-right: 1rem;font-size: 0.7em; cursor: pointer;"
+            *ngFor="let drink of suborder?.ordered_drinks"
+            [ngStyle]="{'background-color': (drink?.prepared_by)? 'green': 'red'}"
+            (click)="setDrinkReady(suborder?.order_id, suborder?._id, drink?.drink_id, !drink?.prepared_by)">
+            {{drink?.name}}
+            <br />
+            <span>x{{drink?.quantity}}</span> <span> Tempo totale: {{drink?.quantity*drink?.time}} min</span>
+          </mat-card>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-card-content>
+</mat-card>

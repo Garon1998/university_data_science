@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title style="font-size: xx-large;">Ordini</mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="width: 40vw;position: relative;float: left;">
+    <mat-toolbar>
+      <mat-toolbar-row *ngFor="let suborder of suborders" style="margin-bottom: 20px;overflow-x: scroll;overflow-y: hidden;">
+
+        <div style="display: contents;">
+
+          <div style="display: contents;">
+            <mat-card style="margin-right: 1rem; cursor: pointer;" [ngStyle]="{'background-color': 'yellow'}" (click)="setSuborderDelivered(suborder?.order_id, suborder?._id)">
+              Cibo del tavolo {{getTavoloDelSuborder(suborder?.order_id)?.table_number}}
+            </mat-card>
+          </div>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-card-content>
+  <mat-card-content style="width: 40vw;position: relative;float: right;">
+    <mat-toolbar>
+      <mat-toolbar-row *ngFor="let suborder of subordersDrinks" style="margin-bottom: 20px;overflow-x: scroll;overflow-y: hidden;">
+
+        <div style="display: contents;">
+
+          <div style="display: contents;">
+            <mat-card style="margin-right: 1rem;  cursor: pointer;" [ngStyle]="{'background-color': 'yellow'}" (click)="setDrinkSuborderDelivered(suborder?.order_id, suborder?._id)">
+              Drink del tavolo {{getTavoloDelSuborder(suborder?.order_id)?.table_number}}
+            </mat-card>
+          </div>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-card-content>
+</mat-card>

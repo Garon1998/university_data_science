@@ -1,0 +1,15 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="margin: 20px 5%;width: 90%;">
+    
+    <ng-container matColumnDef="clients">
+        <th mat-header-cell *matHeaderCellDef> Numero clienti </th>
+        <td mat-cell *matCellDef="let money"> {{money?.nrClients}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="valore">
+        <th mat-header-cell *matHeaderCellDef> Guadagni della giornata </th>
+        <td mat-cell *matCellDef="let money"> {{money?.soldi}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['clients', 'valore']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['clients', 'valore'];"></tr>
+</table>

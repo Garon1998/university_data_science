@@ -1,0 +1,18 @@
+@keyframes color {
+  0% {
+    background-color: yellow;
+  }
+  50% {
+    background-color: chocolate;
+  }
+  100% {
+    background-color: orangered;
+  }
+}
+
+.pulseColor {
+    background-color: yellow;
+    animation-name: color;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
